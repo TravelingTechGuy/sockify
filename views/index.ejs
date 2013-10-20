@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= title %></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Socket.io + PNotify demo">
+	<meta name="keywords" content="socket.io,pnotify">
+	<meta name="author" content="Traveling Tech Guy">
+	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+	<link href="/stylesheets/jquery.pnotify.default.css" media="all" rel="stylesheet" type="text/css" />
+	<!-- Include this file if you are using Pines Icons. 
+	<link href="/stylesheets/jquery.pnotify.default.icons.css" media="all" rel="stylesheet" type="text/css" />-->
+	<style>
+		body {
+			padding-top: 50px; 
+			padding-bottom: 70px;
+		}
+		.row {
+			padding-left: 20px; 
+			padding-right: 20px
+		}
+	</style>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="/javascripts/vendors/html5shiv.js"></script>
+	<script src="/javascripts/vendors/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="container">
+		<div class="row">
+			<div class="col-lg-offset-2 col-lg-8">
+				<h1><%= title %></h1>
+			</div>
+		</div>
+	</div>
+	<!-- navbar -->
+	<div class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+			<a href="#" class="navbar-brand"><%= title %></a>
+		</div>
+	</div>
+	<!-- /navbar -->
+	<script data-main="/javascripts/main" src="/javascripts/vendors/require.js"></script>
+</body>
+</html>
