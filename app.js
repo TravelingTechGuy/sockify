@@ -4,10 +4,10 @@
  */
 'use strict';
 
-var express = require('express'),
-	routes = require('./routes'),
+var routes = require('./routes'),
 	http = require('http'),
 	path = require('path'),
+	express = require('express'),
 	app = express(),
 	server = http.createServer(app),
 	io = require('socket.io').listen(server);
