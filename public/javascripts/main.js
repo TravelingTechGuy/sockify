@@ -34,14 +34,9 @@ require(
 				console.log('update', data);
 				var notification = {
 					title: data.time,
-					text: data.message + ' ' + data.id
+					text: data.message + ' ' + data.id,
+					type: (data.error) ? 'error' : 'success'
 				};
-				if(data.error) {
-					notification.type = 'error';
-				}
-				else {
-					notification.type = 'info';
-				}
 				$.pnotify(notification);
 			});
 			console.log('listening to ' + host);
@@ -49,9 +44,9 @@ require(
 
 		$(function() {
 			$.pnotify({
-				title: 'Regular Notice',
-				text: 'I\'m a notice',
-				type: 'success'
+				title: 'Welcome to Sockify',
+				text: 'A Socket.io + PNotify demo',
+				type: 'info'
 			});
 		});
 	}
