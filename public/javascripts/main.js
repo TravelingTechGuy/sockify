@@ -32,15 +32,19 @@ require(
 			var socket = io.connect(host);
 			socket.on('update', function(data) {
 				console.log('update', data);
-				var notification = {
-					title: data.time,
-					text: data.message + ' ' + data.id,
-					type: (data.error) ? 'error' : 'success'
-				};
-				$.pnotify(notification);
+				notify(data);
 			});
 			console.log('listening to ' + host);
 		}());
+
+		var notify = function(data) {
+			var notification = {
+				title: data.time,
+				text: data.message + ' ' + data.id,
+				type: (data.error) ? 'error' : 'success'
+			};
+			$.pnotify(notification);
+		};
 
 		$(function() {
 			$.pnotify({
