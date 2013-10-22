@@ -27,9 +27,10 @@ require(
 		'bootstrap'
 	],
 	function($, io) {
+		var socket;
 		(function() {
 			var host = location.origin.replace(/^http/, 'ws');
-			var socket = io.connect(host);
+			socket = io.connect(host);
 			socket.on('update', function(data) {
 				console.log('update', data);
 				notify(data);
@@ -46,12 +47,25 @@ require(
 			$.pnotify(notification);
 		};
 
+		var toggleFlow = function() {
+			if($(this).hasClass('btn-danger')) {
+				$(this).removeClass('btn-danger').addClass('btn-success').text('Start Flow');
+				socket.emit('flow', 'stop');
+			}
+			else {
+				$(this).removeClass('btn-success').addClass('btn-danger').text('Stop Flow');
+				socket.emit('flow', 'start');
+			}
+		};
+
 		$(function() {
 			$.pnotify({
 				title: 'Welcome to Sockify',
 				text: 'A Socket.io + PNotify demo',
 				type: 'info'
 			});
+
+			$('#btnFlow').on('click', toggleFlow);
 		});
 	}
 );

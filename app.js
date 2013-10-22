@@ -30,23 +30,35 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+var random = function(n) {
+	return Math.floor(Math.random() * (n + 1));
+};
+
 io.sockets.on('connection', function (socket) {
+	var sending = true;
 	(function repeated() {
 		setTimeout(function() {
 			var message = {
-				id: Math.floor(Math.random() * (1e6+1)),
+				id: random(1e6),
 				time: (new Date).toLocaleTimeString(),
 				message: 'hello',
-				error: Math.floor(Math.random() * (1e6+1)) % 3 == 0	//fictional error 
+				error: random(1e6) % 3 == 0	//fictional error whenever the value divides by 3
 			}
-			socket.emit('update', message);
+			if(sending) {
+				socket.emit('update', message);
+			}
 			repeated();
 		}
-		, (Math.floor(Math.random() * 11)) * 1000);
+		, random(10) * 1000);
 	}());
 	
 	socket.on('seen', function(data) {
 		console.log(data + ' seen');
+	});
+
+	socket.on('flow', function(data) {
+		console.log('flow changed to %s', data);
+		sending = !(data == 'stop'); 
 	});
 });
 
