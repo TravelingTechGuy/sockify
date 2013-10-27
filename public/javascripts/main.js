@@ -1,14 +1,6 @@
 'use strict';
 
 requirejs.config({
-	shim: {
-		'bootstrap': {
-			deps: ['jquery']
-		},
-		'pnotify': {
-			deps: ['bootstrap']
-		}
-	},
 	paths: {
 		'jquery': [
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
@@ -17,6 +9,14 @@ requirejs.config({
 		'socket.io': '/socket.io/socket.io',
 		'bootstrap': 'vendors/bootstrap.min',
 		'pnotify': 'vendors/jquery.pnotify'
+	},
+	shim: {
+		'bootstrap': {
+			deps: ['jquery']
+		},
+		'pnotify': {
+			deps: ['bootstrap']
+		}
 	}
 });
 require(
@@ -59,13 +59,12 @@ require(
 		};
 
 		$(function() {
+			$('#btnFlow').on('click', toggleFlow);
 			$.pnotify({
 				title: 'Welcome to Sockify',
 				text: 'A Socket.io + PNotify demo',
 				type: 'info'
 			});
-
-			$('#btnFlow').on('click', toggleFlow);
 		});
 	}
 );
