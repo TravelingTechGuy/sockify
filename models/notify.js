@@ -24,7 +24,7 @@ var loop = function(socket) {
 		var message = {
 			id: random(1e6),
 			time: (new Date).toLocaleTimeString(),
-			message: ['hello world', 'this is', 'a random', 'meesage'][random(3)],
+			message: randomMessage,
 			error: random(1e6) % 3 == 0	//fictional error whenever the value divides by 3
 		}
 		if(sending) {
@@ -37,4 +37,9 @@ var loop = function(socket) {
 
 var random = function(n) {
 	return Math.floor(Math.random() * (n + 1));
+};
+
+var randomMessage = function() {
+	messages = ['hello world', 'this is', 'a random', 'meesage'];
+	return messages[random(1000) % messages.length];
 };
