@@ -14,8 +14,8 @@ requirejs.config({
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
 			'vendors/jquery-1.10.2.min'
 		],
-		'bootstrap': 'vendors/bootstrap.min',
 		'socket.io': '/socket.io/socket.io',
+		'bootstrap': 'vendors/bootstrap.min',
 		'pnotify': 'vendors/jquery.pnotify'
 	}
 });
@@ -27,21 +27,21 @@ require(
 		'bootstrap'
 	],
 	function($, io) {
-		var socket;
-		(function() {
+		var socket = function() {
 			var host = location.origin.replace(/^http/, 'ws');
-			socket = io.connect(host);
+			var socket = io.connect(host);
 			socket.on('update', function(data) {
 				console.log('update', data);
 				notify(data);
 			});
 			console.log('listening to ' + host);
-		}());
+			return socket;
+		} ();
 
 		var notify = function(data) {
 			var notification = {
 				title: data.time,
-				text: data.message + ' ' + data.id,
+				text: data.id + ': ' + data.message,
 				type: (data.error) ? 'error' : 'success'
 			};
 			$.pnotify(notification);
