@@ -6,7 +6,10 @@ requirejs.config({
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
 			'vendors/jquery-1.10.2.min'
 		],
-		'socket.io': '/socket.io/socket.io',
+		'socket.io': [
+			'/socket.io/socket.io',
+			'vendors/socket.io'
+		],
 		'bootstrap': 'vendors/bootstrap.min',
 		'pnotify': 'vendors/jquery.pnotify'
 	},
