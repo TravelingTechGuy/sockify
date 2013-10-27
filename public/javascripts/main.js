@@ -18,7 +18,7 @@ requirejs.config({
 			deps: ['jquery']
 		},
 		'pnotify': {
-			deps: ['bootstrap']
+			deps: ['jquery', 'bootstrap']
 		}
 	}
 });
