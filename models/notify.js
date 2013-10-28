@@ -6,8 +6,8 @@ module.exports = function(io) {
 	io.sockets.on('connection', function(socket) {	
 		loop(socket);
 	
-		socket.on('seen', function(data) {
-			console.log(data + ' seen');
+		socket.on('acknowledged', function(data) {
+			console.log(data + ' acknowledged');
 		});
 
 		socket.on('flow', function(data) {
@@ -24,11 +24,11 @@ var loop = function(socket) {
 		var message = {
 			id: random(1e6),
 			time: (new Date).toLocaleTimeString(),
-			message: randomMessage,
+			message: randomMessage(),
 			error: random(1e6) % 3 == 0	//fictional error whenever the value divides by 3
 		}
 		if(sending) {
-			socket.emit('update', message);
+			socket.emit('notify', message);
 		}
 		loop(socket);
 	}
@@ -40,6 +40,6 @@ var random = function(n) {
 };
 
 var randomMessage = function() {
-	messages = ['hello world', 'this is', 'a random', 'meesage'];
+	var messages = ['hello world', 'this is', 'a random', 'message'];
 	return messages[random(1000) % messages.length];
 };
