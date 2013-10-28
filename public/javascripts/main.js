@@ -33,8 +33,8 @@ require(
 		var socket = function() {
 			var host = location.origin.replace(/^http/, 'ws');
 			var socket = io.connect(host);
-			socket.on('update', function(data) {
-				console.log('update', data);
+			socket.on('notify', function(data) {
+				console.log('notify', data);
 				notify(data);
 			});
 			console.log('listening to ' + host);
@@ -47,7 +47,23 @@ require(
 				text: data.id + ': ' + data.message,
 				type: (data.error) ? 'error' : 'success'
 			};
-			$.pnotify(notification);
+			$.pnotify(notification).on('click', function(e) {
+				var action = $(e.target).attr('title').toLowerCase();
+				notificationClicked(action, data.id);
+			});
+		};
+
+		var notificationClicked = function(action, id) {
+			if(action === 'close') {
+				console.log('notification %s acknowledged', id);
+				socket.emit('acknowledged', id);
+			}
+			else if(action === 'stick') {
+				//handle pause click, if needed
+			}
+			else {
+				//handle FFU?
+			}
 		};
 
 		var toggleFlow = function() {
