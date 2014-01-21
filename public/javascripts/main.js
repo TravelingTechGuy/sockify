@@ -30,7 +30,7 @@ require(
 		'bootstrap'
 	],
 	function($, io) {
-		var socket = function() {
+		var socket = (function() {
 			var host = location.origin.replace(/^http/, 'ws');
 			var socket = io.connect(host);
 			socket.on('notify', function(data) {
@@ -39,7 +39,7 @@ require(
 			});
 			console.log('listening to ' + host);
 			return socket;
-		} ();
+		}());
 
 		var notify = function(data) {
 			var notification = {
