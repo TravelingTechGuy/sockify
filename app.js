@@ -25,14 +25,18 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if ('development' === app.get('env')) {
+	app.use(express.errorHandler());
 }
 
+//route index page
 app.get('/', routes.index);
 
-var notify = require('./models/notify')(io);
+//socket listening
+var notify = require('./models/notify');
+notify.listen(io);
 
+//start server
 server.listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
 });
